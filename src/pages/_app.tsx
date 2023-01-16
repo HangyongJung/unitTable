@@ -15,31 +15,19 @@ function MyApp({ Component, pageProps }: AppProps) {
   const autheRoutes = ["/register", "/login"]
   const authRoute = autheRoutes.includes(pathname)
 
-  const fetcher = async (url: string) => {
-    try {
-      const res = await axios.get(url)
-      return res.data
-    } catch (error: any) {
-      throw error.response.data
-    }
-  }
-
   return (
     <>
       <Head>
         <script src="https://unpkg.com/flowbite@1.5.4/dist/flowbite.js"></script>
         <script defer src="https://use.fontawesome.com/releases/v6.1.1/js/all.js" integrity="sha384-xBXmu0dk1bEoiwd71wOonQLyH+VpgR1XcDH3rtxrLww5ajNTuMvBdL5SOiFZnNdp" crossOrigin="anonymous"></script>
       </Head>
-      <SWRConfig value={{ fetcher }}>
-        {/* {!authRoute && <NavBar />} */}
-        <div className='flex flex-row'>
-          <SideBar />
-          <div className='w-full h-screen overflow-scroll'>
-            <Component {...pageProps} />
-          </div>
+      {/* {!authRoute && <NavBar />} */}
+      <div className='flex flex-row'>
+        <SideBar />
+        <div className='w-full h-screen overflow-scroll'>
+          <Component {...pageProps} />
         </div>
-
-      </SWRConfig>
+      </div>
     </>
   )
 }
