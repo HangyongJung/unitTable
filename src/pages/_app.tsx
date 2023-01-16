@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import { SWRConfig } from 'swr'
 import axios from 'axios'
 import Head from 'next/head'
-import SideBar from './components/SideBar'
+import SideBar from '../components/SideBar'
 
 function MyApp({ Component, pageProps }: AppProps) {
   Axios.defaults.baseURL = process.env.NEXT_PUBLIC_SERVER_BASE_URL + "/api"
