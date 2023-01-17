@@ -38,7 +38,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-6B9TTPEHY2', {
+            gtag('config', 'G-2LC2GCG0ZN', {
               page_path: window.location.pathname,
             });
           `,
