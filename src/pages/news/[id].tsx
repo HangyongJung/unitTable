@@ -40,10 +40,8 @@ export async function getServerSideProps(context) {
       "Content-Type": "application/json",
     }
   })
-  console.log(res)
-  console.log(res.json())
   const news = await res.json()
-
+  console.log(news)
   // By returning { props: { posts } }, the Blog component
   // will receive `posts` as a prop at build time
   return {
