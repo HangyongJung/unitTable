@@ -27,9 +27,7 @@ const News = ({ news }) => {
 
 
 export async function getServerSideProps(context) {
-  const { id } = context.params
-  console.log(context)
-  console.log(context.params)
+  const { id } = context.params.query
 
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
