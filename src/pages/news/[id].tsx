@@ -26,7 +26,7 @@ const News = ({ news }) => {
 }
 
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const router = useRouter()
   const { id } = router.query
   // Call an external API endpoint to get posts.
