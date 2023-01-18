@@ -35,7 +35,7 @@ export async function getServerSideProps(context) {
   // You can use any data fetching library
   console.log('url', `http://heonpage.com:4000/api/news/${id}`)
   await fetch(`http://heonpage.com:4000/api/news/${id}`, {
-    method: "POST",
+    method: "GET",
     headers: {
       "Content-Type": "application/json",
     }
@@ -43,7 +43,7 @@ export async function getServerSideProps(context) {
     .then(json => console.log(json))
 
   const res = await fetch(`http://heonpage.com:4000/api/news/${id}`, {
-    method: "POST",
+    method: "GET",
     headers: {
       "Content-Type": "application/json",
     }
