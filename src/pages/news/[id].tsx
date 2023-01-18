@@ -7,10 +7,8 @@ interface News {
   article: string
   imgurl: string
 }
-const News = () => {
-  const router = useRouter()
-  const { id } = router.query
-  const { data: news, error, mutate: mutate } = useSWR<News>(id ? `http://heonpage.com:4000/api/news/${id}` : null)
+const News = ({ news }) => {
+
 
   return (
     <div className="bg-white py-24 sm:py-32 lg:py-40">
@@ -27,4 +25,21 @@ const News = () => {
   )
 }
 
+
+export async function getStaticProps() {
+  const router = useRouter()
+  const { id } = router.query
+  // Call an external API endpoint to get posts.
+  // You can use any data fetching library
+  const res = await fetch(`http://heonpage.com:4000/api/news/${id}`)
+  const news = await res.json()
+
+  // By returning { props: { posts } }, the Blog component
+  // will receive `posts` as a prop at build time
+  return {
+    props: {
+      news,
+    },
+  }
+}
 export default News
