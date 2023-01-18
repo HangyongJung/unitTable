@@ -27,7 +27,8 @@ const News = ({ news }) => {
 
 
 export async function getServerSideProps(context) {
-  console.log(context.params.query)
+  console.log('params:::::::::::', context.params)
+  console.log('id', context.params.query)
   // const { id } = context.params.query
   // console.log(id)
 
