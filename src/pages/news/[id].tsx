@@ -26,9 +26,11 @@ const News = ({ news }) => {
 }
 
 
-export async function getServerSideProps() {
-  const router = useRouter()
-  const { id } = router.query
+export async function getServerSideProps(context) {
+  const { id } = context.params
+  console.log(context)
+  console.log(context.params)
+
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
   const res = await fetch(`http://heonpage.com:4000/api/news/${id}`)
@@ -38,7 +40,7 @@ export async function getServerSideProps() {
   // will receive `posts` as a prop at build time
   return {
     props: {
-      news,
+      news
     },
   }
 }
