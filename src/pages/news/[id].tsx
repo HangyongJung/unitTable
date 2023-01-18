@@ -34,7 +34,11 @@ export async function getServerSideProps(context) {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
   const res = await fetch(`http://heonpage.com:4000/api/news/${id}`, {
-    credentials: "include"
+    method: "GET",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    }
   })
   const news = await res.json()
 
