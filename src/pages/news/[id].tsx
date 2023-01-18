@@ -10,7 +10,7 @@ interface News {
 const News = () => {
   const router = useRouter()
   const { id } = router.query
-  const { data: news, error, mutate: mutate } = useSWR<News>(id ? `/news/${id}` : null)
+  const { data: news, error, mutate: mutate } = useSWR<News>(id ? `http://heonpage.com:4000/api/news/${id}` : null)
 
   return (
     <div className="bg-white py-24 sm:py-32 lg:py-40">
