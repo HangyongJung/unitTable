@@ -7,17 +7,17 @@ interface News {
   article: string
   imgurl: string
 }
-const News = ({ news }) => {
-
+const News = ({ news }: { news: News }) => {
+  console.log(news[0].title)
 
   return (
     <div className="bg-white py-24 sm:py-32 lg:py-40">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="sm:text-center">
           <h2 className="text-lg font-semibold leading-8 text-indigo-600">Korean News</h2>
-          <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{news ? news.title : 'non title'}</p>
+          <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{news[0].title}</p>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-600">
-            {news ? news.article : 'non article'}
+            {news[0].article}
           </p>
         </div>
       </div>
@@ -33,15 +33,6 @@ export async function getServerSideProps(context) {
 
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
-  console.log('url', `http://heonpage.com:4000/api/news/${id}`)
-  await fetch(`http://heonpage.com:4000/api/news/${id}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    }
-  }).then(res => res.json())
-    .then(json => console.log(json))
-
   const res = await fetch(`http://heonpage.com:4000/api/news/${id}`, {
     method: "GET",
     headers: {
