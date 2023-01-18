@@ -43,10 +43,12 @@ function MyApp({ Component, pageProps }: AppProps) {
             });
           `,
         }}></Script>
+      <Script
+        strategy="afterInteractive"
+        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3358142377126312`}
+        crossOrigin='anonymous'></Script>
       <Head>
         <meta name="google-site-verification" content="luvYicf9TzmoZtUQ0daUNFpIFgPFmklTkJlIgJc_ha4" />
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3358142377126312"
-          crossOrigin="anonymous"></script>
       </Head>
       <SWRConfig value={{ fetcher }}>
         {/* {!authRoute && <NavBar />} */}
