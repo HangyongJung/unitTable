@@ -40,6 +40,8 @@ export async function getServerSideProps(context) {
       "Content-Type": "application/json",
     }
   })
+  console.log(res)
+  console.log(res.json())
   const news = await res.json()
 
   // By returning { props: { posts } }, the Blog component
