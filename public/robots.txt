@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: http://heonapge.store
+Host: http://heonpage.store
 
 # Sitemaps
-Sitemap: http://heonapge.store/sitemap.xml
+Sitemap: http://heonpage.store/sitemap.xml
