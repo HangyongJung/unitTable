@@ -9,15 +9,15 @@ interface News {
   article: string
   imgUrl: string
 }
-const News = ({ news }: { news: News }) => {
+const News = ({ news }: { news: News[] }) => {
   const router = useRouter()
   const id = router.query.id
-  const { data: data, error, mutate: dataMutate } = useSWR<News[]>(`/news/${id}`)
-  console.log(data)
+
+  // const { data: data, error, mutate: dataMutate } = useSWR<News[]>(`/news/${id}`)
   return (
     <div>
       {
-        !data
+        !news
           ? (
             <div className='dark:bg-gray-900'>
               <div className='flex flex-col items-center justify-center h-screen p-6'>
@@ -30,7 +30,7 @@ const News = ({ news }: { news: News }) => {
           : (
             <div>
               {
-                data.map((item: News, index) => (
+                news.map((item: News, index) => (
                   <div key={index} className="bg-white py-24 sm:py-32 lg:py-40">
                     <div className="mx-auto max-w-7xl px-6 lg:px-8">
                       <div className="sm:text-center">
@@ -60,20 +60,33 @@ export async function getStaticPaths() {
   const apiUrl = process.env.apiUrl
   const res = await axios.get('http://heonpage.com:4000/api/news')
   const data = res.data
-  console.log('res', res)
-  console.log('data', data)
   return {
     // paths: [
     //     { params: { id: '740' } },
     //     { params: { id: '730' } },
     //     { params: { id: '729' } }
     // ],
-    // paths: data.slice(0, 9).map(item => ({
-    //   params: {
-    //     id: item.id.toString()
-    //   },
-    // })),
-    // fallback: true //없는 페이지 대응을 안함
+    paths: data.map(item => ({
+      params: {
+        id: item.id.toString()
+      },
+    })),
+    fallback: true //없는 페이지 대응을 안함
   }
 }
+
+
+export async function getStaticProps(context) {
+  const id = context.params.id
+  const apiUrl = `http://heonpage.com:4000/api/news/${id}`
+  const res = await axios.get(apiUrl)
+  const data = res.data
+
+  return {
+    props: {
+      news: data,
+    }
+  }
+
+};
 export default News
