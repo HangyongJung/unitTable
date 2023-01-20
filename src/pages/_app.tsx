@@ -9,7 +9,7 @@ import SideBar from '../components/SideBar'
 import Script from 'next/script'
 
 function MyApp({ Component, pageProps }: AppProps) {
-  Axios.defaults.baseURL = process.env.NEXT_PUBLIC_SERVER_BASE_URL + "/api"
+  Axios.defaults.baseURL = "http://heonpage.com:4000/api"
   Axios.defaults.withCredentials = true
 
   const { pathname } = useRouter()

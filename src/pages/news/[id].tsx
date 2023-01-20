@@ -1,3 +1,5 @@
+import axios from 'axios'
+import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 import React from 'react'
 import useSWR from 'swr'
@@ -5,49 +7,54 @@ import useSWR from 'swr'
 interface News {
   title: string
   article: string
-  imgurl: string
+  imgUrl: string
 }
 const News = ({ news }: { news: News }) => {
-  console.log(news[0].title)
-
+  const router = useRouter()
+  const id = router.query.id
+  const { data: data, error, mutate: dataMutate } = useSWR<News[]>(`/news/${id}`)
+  console.log(data)
   return (
-    <div className="bg-white py-24 sm:py-32 lg:py-40">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="sm:text-center">
-          <h2 className="text-lg font-semibold leading-8 text-indigo-600">Korean News</h2>
-          <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{news[0].title}</p>
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-600">
-            {news[0].article}
-          </p>
-        </div>
-      </div>
+    <div>
+      {
+        !data
+          ? (
+            <div className='dark:bg-gray-900'>
+              <div className='flex flex-col items-center justify-center h-screen p-6'>
+                <div className='my-4 text-xl'>
+                  no News
+                </div>
+              </div>
+            </div>
+          )
+          : (
+            <div>
+              {
+                data.map((item: News, index) => (
+                  <div key={index} className="bg-white py-24 sm:py-32 lg:py-40">
+                    <div className="mx-auto max-w-7xl px-6 lg:px-8">
+                      <div className="sm:text-center">
+                        <h2 className="text-lg font-semibold leading-8 text-indigo-600">Korean News</h2>
+                        <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{item.title}</p>
+                        <div>
+                          {item.imgUrl && (
+                            <img src={`${item.imgUrl}`} className='mx-auto' />
+                          )}
+                        </div>
+                        <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-600">
+                          {item.article}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              }
+            </div>
+
+          )
+      }
     </div>
   )
 }
 
-
-export async function getServerSideProps(context) {
-  const id = context.params.id
-  // const { id } = context.params.query
-  // console.log(id)
-
-  // Call an external API endpoint to get posts.
-  // You can use any data fetching library
-  const res = await fetch(`http://heonpage.com:4000/api/news/${id}`, {
-    method: "GET",
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-    }
-  })
-  const news = await res.json()
-  console.log(news)
-  // By returning { props: { posts } }, the Blog component
-  // will receive `posts` as a prop at build time
-  return {
-    props: {
-      news
-    },
-  }
-}
 export default News
