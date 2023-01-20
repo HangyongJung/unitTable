@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: http://heonapge.store
+
+# Sitemaps
+Sitemap: http://heonapge.store/sitemap.xml
