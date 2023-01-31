@@ -51,6 +51,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="google-site-verification" content="luvYicf9TzmoZtUQ0daUNFpIFgPFmklTkJlIgJc_ha4" />
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3358142377126312"
           crossOrigin="anonymous"></script>
+        <link rel="canonical" href={`http://heonpage.store` + pathname} />
       </Head>
       <SWRConfig value={{ fetcher }}>
         {/* {!authRoute && <NavBar />} */}
